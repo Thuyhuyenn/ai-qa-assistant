@@ -1,164 +1,470 @@
 [
   {
     "id": "TC01",
-    "title": "Đăng nhập thành công với tài khoản standard_user",
+    "title": "Đăng nhập thành công với standard_user bằng cách click nút Login",
     "type": "positive",
     "passed": true,
     "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
-    "duration_s": 9.48,
+    "duration_s": 9.5,
     "screenshot": "output/screenshots/TC01.png"
   },
   {
     "id": "TC02",
-    "title": "Đăng nhập thành công với tài khoản problem_user",
+    "title": "Đăng nhập thành công với standard_user bằng phím Enter tại ô Password",
     "type": "positive",
     "passed": true,
     "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
-    "duration_s": 1.47,
+    "duration_s": 1.57,
     "screenshot": "output/screenshots/TC02.png"
   },
   {
     "id": "TC03",
-    "title": "Đăng nhập thành công với tài khoản performance_glitch_user",
+    "title": "Đăng nhập thành công với standard_user bằng phím Enter tại ô Username",
     "type": "positive",
     "passed": true,
     "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
-    "duration_s": 5.88,
+    "duration_s": 1.66,
     "screenshot": "output/screenshots/TC03.png"
   },
   {
     "id": "TC04",
-    "title": "Đăng nhập thành công bằng cách nhấn phím Enter trên trường password",
+    "title": "Đăng nhập thành công với performance_glitch_user bằng cách click nút Login",
     "type": "positive",
     "passed": true,
     "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
-    "duration_s": 1.74,
+    "duration_s": 5.88,
     "screenshot": "output/screenshots/TC04.png"
   },
   {
     "id": "TC05",
-    "title": "Đăng nhập thất bại với tài khoản bị khóa (locked_out_user)",
-    "type": "negative",
+    "title": "Đăng nhập thành công với problem_user bằng cách click nút Login",
+    "type": "positive",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Sorry, this user has been locked out.'",
-    "duration_s": 13.01,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.79,
     "screenshot": "output/screenshots/TC05.png"
   },
   {
     "id": "TC06",
-    "title": "Đăng nhập thất bại với mật khẩu sai",
-    "type": "negative",
+    "title": "Đăng nhập thành công với visual_user bằng cách click nút Login",
+    "type": "positive",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
     "duration_s": 1.67,
     "screenshot": "output/screenshots/TC06.png"
   },
   {
     "id": "TC07",
-    "title": "Đăng nhập thất bại với tên đăng nhập không tồn tại",
-    "type": "negative",
+    "title": "Đăng nhập thành công với error_user bằng phím Enter",
+    "type": "positive",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.41,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 2.79,
     "screenshot": "output/screenshots/TC07.png"
   },
   {
     "id": "TC08",
-    "title": "Đăng nhập thất bại khi bỏ trống cả username và password",
-    "type": "negative",
+    "title": "Đăng nhập thành công với standard_user sau khi xóa lỗi đăng nhập trước đó",
+    "type": "positive",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
-    "duration_s": 1.41,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.59,
     "screenshot": "output/screenshots/TC08.png"
   },
   {
     "id": "TC09",
-    "title": "Đăng nhập thất bại khi để trống trường username",
-    "type": "boundary",
+    "title": "Đăng nhập thành công sau khi copy-paste dữ liệu hợp lệ vào các trường",
+    "type": "positive",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
-    "duration_s": 1.5,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.59,
     "screenshot": "output/screenshots/TC09.png"
   },
   {
     "id": "TC10",
-    "title": "Đăng nhập thất bại khi để trống trường password",
-    "type": "boundary",
+    "title": "Đăng nhập thành công và duy trì phiên làm việc chuyển hướng tới /inventory.html",
+    "type": "positive",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Password is required'",
-    "duration_s": 1.64,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.53,
     "screenshot": "output/screenshots/TC10.png"
   },
   {
     "id": "TC11",
-    "title": "Đăng nhập thất bại với username có độ dài quá lớn",
-    "type": "boundary",
+    "title": "Đăng nhập với ô Username để trống và Password hợp lệ",
+    "type": "negative",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.4,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
+    "duration_s": 2.44,
     "screenshot": "output/screenshots/TC11.png"
   },
   {
     "id": "TC12",
-    "title": "Đăng nhập thất bại với mật khẩu chứa ký tự đặc biệt không hợp lệ",
-    "type": "boundary",
+    "title": "Đăng nhập với Username hợp lệ và ô Password để trống",
+    "type": "negative",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.41,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Password is required'",
+    "duration_s": 1.5,
     "screenshot": "output/screenshots/TC12.png"
   },
   {
     "id": "TC13",
-    "title": "Đăng nhập thất bại do phân biệt chữ hoa/thường ở username",
-    "type": "validation",
+    "title": "Đăng nhập với cả Username và Password đều để trống",
+    "type": "negative",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.41,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
+    "duration_s": 1.48,
     "screenshot": "output/screenshots/TC13.png"
   },
   {
     "id": "TC14",
-    "title": "Đăng nhập thất bại do phân biệt chữ hoa/thường ở password",
-    "type": "validation",
+    "title": "Đăng nhập với Username không tồn tại trong hệ thống",
+    "type": "negative",
     "passed": true,
     "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.4,
+    "duration_s": 1.5,
     "screenshot": "output/screenshots/TC14.png"
   },
   {
     "id": "TC15",
-    "title": "Đăng nhập thất bại khi username chứa khoảng trắng thừa ở đầu",
-    "type": "validation",
+    "title": "Đăng nhập với đúng Username nhưng sai Password",
+    "type": "negative",
     "passed": true,
     "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.4,
+    "duration_s": 1.49,
     "screenshot": "output/screenshots/TC15.png"
   },
   {
     "id": "TC16",
-    "title": "Đăng nhập thất bại khi password chứa khoảng trắng thừa ở cuối",
-    "type": "validation",
+    "title": "Đăng nhập với tài khoản đã bị khóa (locked_out_user)",
+    "type": "negative",
     "passed": true,
-    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.41,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Sorry, this user has been locked out.'",
+    "duration_s": 1.8,
     "screenshot": "output/screenshots/TC16.png"
   },
   {
     "id": "TC17",
-    "title": "Đăng nhập thất bại khi nhập username dạng SQL Injection cơ bản",
+    "title": "Đăng nhập với Username chỉ chứa toàn khoảng trắng",
     "type": "validation",
     "passed": true,
     "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.42,
+    "duration_s": 2.12,
     "screenshot": "output/screenshots/TC17.png"
   },
   {
     "id": "TC18",
-    "title": "Đăng nhập thất bại khi nhập script HTML/XSS vào username",
+    "title": "Đăng nhập sai phân biệt chữ hoa chữ thường (Case-sensitivity) ở Username",
     "type": "validation",
     "passed": true,
     "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
-    "duration_s": 1.39,
+    "duration_s": 2.04,
     "screenshot": "output/screenshots/TC18.png"
+  },
+  {
+    "id": "TC19",
+    "title": "Đăng nhập với username để trống và password hợp lệ",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
+    "duration_s": 1.6,
+    "screenshot": "output/screenshots/TC19.png"
+  },
+  {
+    "id": "TC20",
+    "title": "Đăng nhập với username hợp lệ và password để trống",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Password is required'",
+    "duration_s": 1.5,
+    "screenshot": "output/screenshots/TC20.png"
+  },
+  {
+    "id": "TC21",
+    "title": "Đăng nhập với username chứa khoảng trắng ở đầu và cuối",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.54,
+    "screenshot": "output/screenshots/TC21.png"
+  },
+  {
+    "id": "TC22",
+    "title": "Đăng nhập với chuỗi ký tự cực dài trong ô username",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.51,
+    "screenshot": "output/screenshots/TC22.png"
+  },
+  {
+    "id": "TC23",
+    "title": "Đăng nhập với username chứa ký tự đặc biệt",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.53,
+    "screenshot": "output/screenshots/TC23.png"
+  },
+  {
+    "id": "TC24",
+    "title": "Đăng nhập với username chứa ký tự Unicode và tiếng Việt có dấu",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.5,
+    "screenshot": "output/screenshots/TC24.png"
+  },
+  {
+    "id": "TC25",
+    "title": "Đăng nhập với username chứa emoji",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.54,
+    "screenshot": "output/screenshots/TC25.png"
+  },
+  {
+    "id": "TC26",
+    "title": "Đăng nhập với password chứa cú pháp SQL Injection đơn giản",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.51,
+    "screenshot": "output/screenshots/TC26.png"
+  },
+  {
+    "id": "TC27",
+    "title": "Đăng nhập với password chứa thẻ HTML/XSS payload",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.65,
+    "screenshot": "output/screenshots/TC27.png"
+  },
+  {
+    "id": "TC28",
+    "title": "Dang nhap voi SQL Injection trong truong Username",
+    "type": "negative",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.51,
+    "screenshot": "output/screenshots/TC28.png"
+  },
+  {
+    "id": "TC29",
+    "title": "Dang nhap voi SQL Injection trong truong Password",
+    "type": "negative",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.49,
+    "screenshot": "output/screenshots/TC29.png"
+  },
+  {
+    "id": "TC30",
+    "title": "Dang nhap voi payload XSS trong truong Username",
+    "type": "negative",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.44,
+    "screenshot": "output/screenshots/TC30.png"
+  },
+  {
+    "id": "TC31",
+    "title": "Kiem tra tinh nang che mat khau (Password Masking)",
+    "type": "negative",
+    "passed": true,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.47,
+    "screenshot": "output/screenshots/TC31.png"
+  },
+  {
+    "id": "TC32",
+    "title": "Thong bao loi khong duoc lo thong tin chi tiet ve he thong",
+    "type": "negative",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.51,
+    "screenshot": "output/screenshots/TC32.png"
+  },
+  {
+    "id": "TC33",
+    "title": "Truy cap truc tiep trang inventory.html khi chua dang nhap",
+    "type": "negative",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
+    "duration_s": 1.49,
+    "screenshot": "output/screenshots/TC33.png"
+  },
+  {
+    "id": "TC34",
+    "title": "Kiem tra thong tin nhay cam tren URL sau khi dang nhap thanh cong",
+    "type": "negative",
+    "passed": true,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.54,
+    "screenshot": "output/screenshots/TC34.png"
+  },
+  {
+    "id": "TC35",
+    "title": "Dang nhap sai nhieu lan lien tiep (Kiem tra co che khoa tai khoan hoac rate limit)",
+    "type": "negative",
+    "passed": false,
+    "actual": "Thông báo lỗi khác với mong đợi. Thực tế nhận được: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.69,
+    "screenshot": "output/screenshots/TC35.png"
+  },
+  {
+    "id": "TC36",
+    "title": "Đăng xuất thành công từ trang inventory",
+    "type": "positive",
+    "passed": true,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.51,
+    "screenshot": "output/screenshots/TC36.png"
+  },
+  {
+    "id": "TC37",
+    "title": "Sử dụng nút Back của trình duyệt sau khi đã đăng xuất",
+    "type": "negative",
+    "passed": false,
+    "actual": "Lẽ ra phải bị chặn ở trang đăng nhập nhưng lại vào được https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.53,
+    "screenshot": "output/screenshots/TC37.png"
+  },
+  {
+    "id": "TC38",
+    "title": "Sử dụng nút Forward của trình duyệt sau khi đăng nhập",
+    "type": "negative",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
+    "duration_s": 1.43,
+    "screenshot": "output/screenshots/TC38.png"
+  },
+  {
+    "id": "TC39",
+    "title": "Tải lại trang (F5) khi đang ở trang inventory sau khi đăng nhập",
+    "type": "positive",
+    "passed": true,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.5,
+    "screenshot": "output/screenshots/TC39.png"
+  },
+  {
+    "id": "TC40",
+    "title": "Truy cập trực tiếp URL /inventory.html khi chưa đăng nhập",
+    "type": "negative",
+    "passed": false,
+    "actual": "Thông báo lỗi khác với mong đợi. Thực tế nhận được: 'Epic sadface: Username is required'",
+    "duration_s": 1.49,
+    "screenshot": "output/screenshots/TC40.png"
+  },
+  {
+    "id": "TC41",
+    "title": "Mở nhiều tab trình duyệt cùng lúc với một phiên đăng nhập",
+    "type": "positive",
+    "passed": true,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.48,
+    "screenshot": "output/screenshots/TC41.png"
+  },
+  {
+    "id": "TC42",
+    "title": "Đăng xuất ở một tab và thao tác trên tab khác",
+    "type": "negative",
+    "passed": false,
+    "actual": "Lẽ ra phải bị chặn ở trang đăng nhập nhưng lại vào được https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.55,
+    "screenshot": "output/screenshots/TC42.png"
+  },
+  {
+    "id": "TC43",
+    "title": "Click liên tục nhiều lần vào nút Login (Double/Multi Submit)",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.45,
+    "screenshot": "output/screenshots/TC43.png"
+  },
+  {
+    "id": "TC44",
+    "title": "Tải lại trang (F5) tại màn hình đăng nhập khi đang nhập dở dữ liệu",
+    "type": "negative",
+    "passed": false,
+    "actual": "Lẽ ra phải bị chặn ở trang đăng nhập nhưng lại vào được https://www.saucedemo.com/inventory.html",
+    "duration_s": 1.51,
+    "screenshot": "output/screenshots/TC44.png"
+  },
+  {
+    "id": "TC45",
+    "title": "Kiểm tra hiển thị nhãn và placeholder của các trường nhập liệu",
+    "type": "positive",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
+    "duration_s": 1.49,
+    "screenshot": "output/screenshots/TC45.png"
+  },
+  {
+    "id": "TC46",
+    "title": "Kiểm tra khả năng điều hướng bằng phím Tab giữa các thành phần",
+    "type": "positive",
+    "passed": false,
+    "actual": "Không vào được trang sản phẩm. URL=https://www.saucedemo.com/. Thông báo lỗi: Epic sadface: Username is required",
+    "duration_s": 1.47,
+    "screenshot": "output/screenshots/TC46.png"
+  },
+  {
+    "id": "TC47",
+    "title": "Kiểm tra hiển thị mật khẩu dưới dạng ký tự ẩn (masked password)",
+    "type": "positive",
+    "passed": false,
+    "actual": "Không vào được trang sản phẩm. URL=https://www.saucedemo.com/. Thông báo lỗi: Epic sadface: Username is required",
+    "duration_s": 1.51,
+    "screenshot": "output/screenshots/TC47.png"
+  },
+  {
+    "id": "TC48",
+    "title": "Kiểm tra hiển thị trạng thái loading hoặc phản hồi khi đăng nhập chậm",
+    "type": "positive",
+    "passed": true,
+    "actual": "Đăng nhập thành công, URL=https://www.saucedemo.com/inventory.html",
+    "duration_s": 5.49,
+    "screenshot": "output/screenshots/TC48.png"
+  },
+  {
+    "id": "TC49",
+    "title": "Kiểm tra giao diện và vị trí hiển thị của khối báo lỗi [data-test=\"error\"]",
+    "type": "negative",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
+    "duration_s": 2.4,
+    "screenshot": "output/screenshots/TC49.png"
+  },
+  {
+    "id": "TC50",
+    "title": "Kiểm tra hiển thị giao diện khi tên đăng nhập quá dài tràn khung",
+    "type": "boundary",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.54,
+    "screenshot": "output/screenshots/TC50.png"
+  },
+  {
+    "id": "TC51",
+    "title": "Kiểm tra giao diện trang đăng nhập trên màn hình thiết bị di động (Responsive)",
+    "type": "positive",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username is required'",
+    "duration_s": 1.52,
+    "screenshot": "output/screenshots/TC51.png"
+  },
+  {
+    "id": "TC52",
+    "title": "Kiểm tra nút đóng (nút X) trên khối báo lỗi [data-test=\"error\"]",
+    "type": "positive",
+    "passed": true,
+    "actual": "Hiển thị đúng lỗi mong đợi: 'Epic sadface: Username and password do not match any user in this service'",
+    "duration_s": 1.57,
+    "screenshot": "output/screenshots/TC52.png"
   }
 ]

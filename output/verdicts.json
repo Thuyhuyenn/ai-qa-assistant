@@ -1,1 +1,112 @@
-[]
+[
+  {
+    "verdict": "test_error",
+    "confidence": "high",
+    "reasoning": "Test case (trên trang Demo SauceDemo) mong đợi hệ thống khóa tài khoản sau 5 lần nhập sai với thông báo chứa 'locked out'. Tuy nhiên, trang web thực tế (Sauedemo standard behavior) không cài đặt cơ chế khóa tài khoản hoặc giới hạn tốc độ (rate limit) sau 5 lần sai cho user này, mà vẫn tiếp tục hiển thị thông báo lỗi đăng nhập sai thông thường. Do đó, kỳ vọng của test case không khớp với logic thiết kế thực tế của ứng dụng demo này.",
+    "title": "",
+    "severity": "minor",
+    "severity_reason": "Đây là sai lệch giữa test case và tính năng thực tế của ứng dụng mẫu.",
+    "probable_cause": "Test case giả định ứng dụng có cơ chế rate limit / lock account, nhưng hệ thống thực tế (Sauedemo) không hỗ trợ tính năng này.",
+    "steps_to_reproduce": [
+      "Truy cap trang dang nhap",
+      "Thuc hien nhap sai password cho standard_user 5 lan lien tiep",
+      "Moi lan nhap sai deu click vao #login-button"
+    ],
+    "suggested_fix_for_test": "Cập nhật lại expected outcome của test case TC35 để phù hợp với hành vi thực tế của ứng dụng (không hỗ trợ khóa tài khoản) hoặc chuyển test case sang trạng thái 'Not Applicable' nếu hệ thống không yêu cầu tính năng này.",
+    "test_id": "TC35"
+  },
+  {
+    "verdict": "real_bug",
+    "confidence": "high",
+    "reasoning": "Người dùng đã thực hiện đăng xuất thành công khỏi hệ thống, nhưng khi bấm nút Back trên trình duyệt thì lại truy cập trực tiếp được trang inventory mà không bị yêu cầu đăng nhập lại. Điều này cho thấy session chưa được hủy bỏ hoàn toàn hoặc cơ chế kiểm tra xác thực sau khi đăng xuất bị thiếu.",
+    "title": "Truy cập được trang inventory bằng nút Back của trình duyệt sau khi đăng xuất",
+    "severity": "critical",
+    "severity_reason": "Lỗi bảo mật nghiêm trọng liên quan đến quản lý phiên (session management), cho phép người dùng trái phép truy cập vào khu vực được bảo vệ sau khi đã đăng xuất.",
+    "probable_cause": "Session cookie hoặc token xác thực không bị xóa/hủy hoàn toàn phía server hoặc client khi thực hiện đăng xuất, khiến trình duyệt vẫn tái sử dụng session cũ khi quay lại bằng nút Back.",
+    "steps_to_reproduce": [
+      "Đăng nhập thành công vào hệ thống với tài khoản standard_user",
+      "Thực hiện đăng xuất",
+      "Bấm nút Back trên trình duyệt để quay lại trang inventory"
+    ],
+    "suggested_fix_for_test": "",
+    "test_id": "TC37"
+  },
+  {
+    "verdict": "test_error",
+    "confidence": "high",
+    "reasoning": "Test case mong đợi thông báo lỗi 'You can only access', nhưng thực tế hệ thống (SauceDemo) trả về thông báo 'Epic sadface: Username is required' khi cố gắng truy cập trang inventory mà chưa đăng nhập. Đây là hành vi thiết kế thực tế của trang web này, nghĩa là phần kỳ vọng trong test case đã định nghĩa sai thông báo lỗi thực tế của hệ thống.",
+    "title": "",
+    "severity": "minor",
+    "severity_reason": "Đây là lỗi định nghĩa trong test case, không ảnh hưởng đến code sản phẩm.",
+    "probable_cause": "Test case định nghĩa sai expected error message ('You can only access') so với thông báo thực tế của hệ thống ('Epic sadface: Username is required').",
+    "steps_to_reproduce": [
+      "Mở trình duyệt ở trạng thái chưa đăng nhập",
+      "Nhập trực tiếp đường dẫn https://www.saucedemo.com/inventory.html vào thanh địa chỉ"
+    ],
+    "suggested_fix_for_test": "Cập nhật lại giá trị 'error_contains' trong phần 'expected' của test case thành 'Epic sadface: Username is required' cho phù hợp với thực tế hệ thống.",
+    "test_id": "TC40"
+  },
+  {
+    "verdict": "real_bug",
+    "confidence": "high",
+    "reasoning": "Test case kiểm tra tính đồng bộ của session, yêu cầu khi đăng xuất ở Tab 1 thì Tab 2 phải bị chặn và không cho phép tiếp tục thao tác. Kết quả thực tế cho thấy sau khi đăng xuất ở Tab 1, Tab 2 vẫn truy cập thành công vào trang inventory.html mà không bị chuyển hướng về trang đăng nhập, điều này vi phạm yêu cầu bảo mật về phiên đăng nhập.",
+    "title": "Lỗi đồng bộ session: Tab thứ hai vẫn truy cập được trang inventory sau khi đăng xuất ở Tab đầu tiên",
+    "severity": "major",
+    "severity_reason": "Vi phạm quy chế bảo mật phiên làm việc (session management), cho phép người dùng tiếp tục thao tác trên trang được bảo vệ mặc dù đã thực hiện đăng xuất.",
+    "probable_cause": "Cơ chế quản lý session phía client (LocalStorage/SessionStorage/Cookie) không được xóa hoặc đồng bộ hóa kịp thời giữa các tab trên cùng trình duyệt khi sự kiện đăng xuất xảy ra.",
+    "steps_to_reproduce": [
+      "Đăng nhập thành công và mở 2 tab (Tab 1 và Tab 2)",
+      "Thực hiện đăng xuất ở Tab 1",
+      "Chuyển sang Tab 2 và thực hiện một thao tác bất kỳ (như click thêm sản phẩm hoặc truy cập trực tiếp trang inventory.html)"
+    ],
+    "suggested_fix_for_test": null,
+    "test_id": "TC42"
+  },
+  {
+    "verdict": "real_bug",
+    "confidence": "high",
+    "reasoning": "Test case là negative test cho màn hình đăng nhập (F5 khi đang nhập dở), kỳ vọng người dùng vẫn ở trang đăng nhập hoặc xử lý lỗi phiên, tuy nhiên kết quả thực tế lại cho phép truy cập thẳng vào trang inventory mà không cần xác thực thành công.",
+    "title": "Bypass màn hình đăng nhập khi làm mới trang (F5) với dữ liệu chưa submit",
+    "severity": "critical",
+    "severity_reason": "Lỗ hổng bảo mật nghiêm trọng cho phép truy cập trực tiếp vào hệ thống (inventory) mà không qua xác thực thành công.",
+    "probable_cause": "Hệ thống lưu trữ trạng thái phiên làm việc hoặc token không đúng cách trước khi hoàn tất quá trình xác thực đăng nhập.",
+    "steps_to_reproduce": [
+      "Nhập username và password vào form đăng nhập",
+      "Bấm F5 làm mới trang",
+      "Kiểm tra trạng thái điều hướng"
+    ],
+    "suggested_fix_for_test": "",
+    "test_id": "TC44"
+  },
+  {
+    "verdict": "test_error",
+    "confidence": "high",
+    "reasoning": "Test case yêu cầu kiểm tra điều hướng bằng phím Tab từ ô #user-name đến #password và #login-button, sau đó kích hoạt submit, nhưng lại không cung cấp dữ liệu đầu vào cho 'username' và 'password' (đều để trống). Do hệ thống yêu cầu bắt buộc phải có username, việc submit form trống dẫn đến lỗi 'Epic sadface: Username is required' là hoàn toàn đúng logic thiết kế. Nguyên nhân fail là do test case thiếu dữ liệu đầu vào hợp lệ.",
+    "title": "",
+    "severity": "minor",
+    "severity_reason": "Đây là lỗi cấu hình test case, không phải lỗi hệ thống.",
+    "probable_cause": "Test case định nghĩa dữ liệu đầu vào cho username và password là rỗng nhưng lại mong đợi kết quả thành công (success) và chuyển hướng tới trang sản phẩm.",
+    "steps_to_reproduce": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Nhấn phím Tab liên tục để di chuyển giữa các thành phần và kích hoạt nút đăng nhập mà không nhập thông tin tài khoản."
+    ],
+    "suggested_fix_for_test": "Cần bổ sung dữ liệu hợp lệ cho 'username' và 'password' trong phần 'data' của test case trước khi thực hiện thao tác nhấn nút đăng nhập.",
+    "test_id": "TC46"
+  },
+  {
+    "verdict": "test_error",
+    "confidence": "high",
+    "reasoning": "Test case định nghĩa dữ liệu đầu vào cho 'username' để trống (value: \"\"), nhưng hệ thống yêu cầu bắt buộc phải có username (thông báo lỗi: 'Epic sadface: Username is required'). Do đó, việc không vào được trang sản phẩm là do test case thiếu dữ liệu đầu hợp lệ, dẫn đến việc không thể thực hiện bước tiếp theo là kiểm tra ô password.",
+    "title": null,
+    "severity": null,
+    "severity_reason": null,
+    "probable_cause": "Test case định nghĩa thiếu dữ liệu đầu vào (username bị để trống), trong khi trang đăng nhập yêu cầu bắt buộc phải điền username trước khi hệ thống cho phép đăng nhập và chuyển hướng sang trang sản phẩm.",
+    "steps_to_reproduce": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Bỏ trống ô username và nhập mật khẩu vào ô #password",
+      "Quan sát thông báo lỗi của hệ thống"
+    ],
+    "suggested_fix_for_test": "Cập nhật lại dữ liệu đầu vào của test case TC47, thêm giá trị hợp lệ cho trường 'username' (ví dụ: \"standard_user\") để có thể đăng nhập thành công và tiến hành kiểm tra hiển thị mật khẩu.",
+    "test_id": "TC47"
+  }
+]

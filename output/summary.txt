@@ -1,0 +1,91 @@
+======================================================================
+BÁO CÁO TỔNG HỢP KẾT QUẢ KIỂM THỬ
+======================================================================
+Tổng số test case : 52
+Đạt (PASS)        : 45
+Thất bại (FAIL)   : 7
+Lỗi thật (bug)    : 3
+
+--- Thống kê theo nhóm ---
+  Luồng chính (happy path): 10 đạt / 0 thất bại
+  Dữ liệu không hợp lệ: 8 đạt / 0 thất bại
+  Giá trị biên & ký tự đặc biệt: 9 đạt / 0 thất bại
+  Bảo mật: 7 đạt / 1 thất bại
+  Phiên đăng nhập & điều hướng: 5 đạt / 4 thất bại
+  Giao diện, khả năng sử dụng & hiển thị dữ liệu: 6 đạt / 2 thất bại
+
+--- Chi tiết TẤT CẢ test case ---
+[PASS] TC01 | Luồng chính (happy path) | Đăng nhập thành công với standard_user bằng cách click nút Login
+[PASS] TC02 | Luồng chính (happy path) | Đăng nhập thành công với standard_user bằng phím Enter tại ô Password
+[PASS] TC03 | Luồng chính (happy path) | Đăng nhập thành công với standard_user bằng phím Enter tại ô Username
+[PASS] TC04 | Luồng chính (happy path) | Đăng nhập thành công với performance_glitch_user bằng cách click nút Login
+[PASS] TC05 | Luồng chính (happy path) | Đăng nhập thành công với problem_user bằng cách click nút Login
+[PASS] TC06 | Luồng chính (happy path) | Đăng nhập thành công với visual_user bằng cách click nút Login
+[PASS] TC07 | Luồng chính (happy path) | Đăng nhập thành công với error_user bằng phím Enter
+[PASS] TC08 | Luồng chính (happy path) | Đăng nhập thành công với standard_user sau khi xóa lỗi đăng nhập trước đó
+[PASS] TC09 | Luồng chính (happy path) | Đăng nhập thành công sau khi copy-paste dữ liệu hợp lệ vào các trường
+[PASS] TC10 | Luồng chính (happy path) | Đăng nhập thành công và duy trì phiên làm việc chuyển hướng tới /inventory.html
+[PASS] TC11 | Dữ liệu không hợp lệ | Đăng nhập với ô Username để trống và Password hợp lệ
+[PASS] TC12 | Dữ liệu không hợp lệ | Đăng nhập với Username hợp lệ và ô Password để trống
+[PASS] TC13 | Dữ liệu không hợp lệ | Đăng nhập với cả Username và Password đều để trống
+[PASS] TC14 | Dữ liệu không hợp lệ | Đăng nhập với Username không tồn tại trong hệ thống
+[PASS] TC15 | Dữ liệu không hợp lệ | Đăng nhập với đúng Username nhưng sai Password
+[PASS] TC16 | Dữ liệu không hợp lệ | Đăng nhập với tài khoản đã bị khóa (locked_out_user)
+[PASS] TC17 | Dữ liệu không hợp lệ | Đăng nhập với Username chỉ chứa toàn khoảng trắng
+[PASS] TC18 | Dữ liệu không hợp lệ | Đăng nhập sai phân biệt chữ hoa chữ thường (Case-sensitivity) ở Username
+[PASS] TC19 | Giá trị biên & ký tự đặc biệt | Đăng nhập với username để trống và password hợp lệ
+[PASS] TC20 | Giá trị biên & ký tự đặc biệt | Đăng nhập với username hợp lệ và password để trống
+[PASS] TC21 | Giá trị biên & ký tự đặc biệt | Đăng nhập với username chứa khoảng trắng ở đầu và cuối
+[PASS] TC22 | Giá trị biên & ký tự đặc biệt | Đăng nhập với chuỗi ký tự cực dài trong ô username
+[PASS] TC23 | Giá trị biên & ký tự đặc biệt | Đăng nhập với username chứa ký tự đặc biệt
+[PASS] TC24 | Giá trị biên & ký tự đặc biệt | Đăng nhập với username chứa ký tự Unicode và tiếng Việt có dấu
+[PASS] TC25 | Giá trị biên & ký tự đặc biệt | Đăng nhập với username chứa emoji
+[PASS] TC26 | Giá trị biên & ký tự đặc biệt | Đăng nhập với password chứa cú pháp SQL Injection đơn giản
+[PASS] TC27 | Giá trị biên & ký tự đặc biệt | Đăng nhập với password chứa thẻ HTML/XSS payload
+[PASS] TC28 | Bảo mật | Dang nhap voi SQL Injection trong truong Username
+[PASS] TC29 | Bảo mật | Dang nhap voi SQL Injection trong truong Password
+[PASS] TC30 | Bảo mật | Dang nhap voi payload XSS trong truong Username
+[PASS] TC31 | Bảo mật | Kiem tra tinh nang che mat khau (Password Masking)
+[PASS] TC32 | Bảo mật | Thong bao loi khong duoc lo thong tin chi tiet ve he thong
+[PASS] TC33 | Bảo mật | Truy cap truc tiep trang inventory.html khi chua dang nhap
+[PASS] TC34 | Bảo mật | Kiem tra thong tin nhay cam tren URL sau khi dang nhap thanh cong
+[FAIL] TC35 | Bảo mật | Dang nhap sai nhieu lan lien tiep (Kiem tra co che khoa tai khoan hoac rate limit)
+       Kết quả thực tế : Thông báo lỗi khác với mong đợi. Thực tế nhận được: 'Epic sadface: Username and password do not match any user in this service'
+       Kết luận AI     : test_error | mức độ: minor | tin cậy: high
+       Nguyên nhân     : Test case giả định ứng dụng có cơ chế rate limit / lock account, nhưng hệ thống thực tế (Sauedemo) không hỗ trợ tính năng này.
+[PASS] TC36 | Phiên đăng nhập & điều hướng | Đăng xuất thành công từ trang inventory
+[FAIL] TC37 | Phiên đăng nhập & điều hướng | Sử dụng nút Back của trình duyệt sau khi đã đăng xuất
+       Kết quả thực tế : Lẽ ra phải bị chặn ở trang đăng nhập nhưng lại vào được https://www.saucedemo.com/inventory.html
+       Kết luận AI     : real_bug | mức độ: critical | tin cậy: high
+       Nguyên nhân     : Session cookie hoặc token xác thực không bị xóa/hủy hoàn toàn phía server hoặc client khi thực hiện đăng xuất, khiến trình duyệt vẫn tái sử dụng session cũ khi quay lại bằng nút Back.
+[PASS] TC38 | Phiên đăng nhập & điều hướng | Sử dụng nút Forward của trình duyệt sau khi đăng nhập
+[PASS] TC39 | Phiên đăng nhập & điều hướng | Tải lại trang (F5) khi đang ở trang inventory sau khi đăng nhập
+[FAIL] TC40 | Phiên đăng nhập & điều hướng | Truy cập trực tiếp URL /inventory.html khi chưa đăng nhập
+       Kết quả thực tế : Thông báo lỗi khác với mong đợi. Thực tế nhận được: 'Epic sadface: Username is required'
+       Kết luận AI     : test_error | mức độ: minor | tin cậy: high
+       Nguyên nhân     : Test case định nghĩa sai expected error message ('You can only access') so với thông báo thực tế của hệ thống ('Epic sadface: Username is required').
+[PASS] TC41 | Phiên đăng nhập & điều hướng | Mở nhiều tab trình duyệt cùng lúc với một phiên đăng nhập
+[FAIL] TC42 | Phiên đăng nhập & điều hướng | Đăng xuất ở một tab và thao tác trên tab khác
+       Kết quả thực tế : Lẽ ra phải bị chặn ở trang đăng nhập nhưng lại vào được https://www.saucedemo.com/inventory.html
+       Kết luận AI     : real_bug | mức độ: major | tin cậy: high
+       Nguyên nhân     : Cơ chế quản lý session phía client (LocalStorage/SessionStorage/Cookie) không được xóa hoặc đồng bộ hóa kịp thời giữa các tab trên cùng trình duyệt khi sự kiện đăng xuất xảy ra.
+[PASS] TC43 | Phiên đăng nhập & điều hướng | Click liên tục nhiều lần vào nút Login (Double/Multi Submit)
+[FAIL] TC44 | Phiên đăng nhập & điều hướng | Tải lại trang (F5) tại màn hình đăng nhập khi đang nhập dở dữ liệu
+       Kết quả thực tế : Lẽ ra phải bị chặn ở trang đăng nhập nhưng lại vào được https://www.saucedemo.com/inventory.html
+       Kết luận AI     : real_bug | mức độ: critical | tin cậy: high
+       Nguyên nhân     : Hệ thống lưu trữ trạng thái phiên làm việc hoặc token không đúng cách trước khi hoàn tất quá trình xác thực đăng nhập.
+[PASS] TC45 | Giao diện, khả năng sử dụng & hiển thị dữ liệu | Kiểm tra hiển thị nhãn và placeholder của các trường nhập liệu
+[FAIL] TC46 | Giao diện, khả năng sử dụng & hiển thị dữ liệu | Kiểm tra khả năng điều hướng bằng phím Tab giữa các thành phần
+       Kết quả thực tế : Không vào được trang sản phẩm. URL=https://www.saucedemo.com/. Thông báo lỗi: Epic sadface: Username is required
+       Kết luận AI     : test_error | mức độ: minor | tin cậy: high
+       Nguyên nhân     : Test case định nghĩa dữ liệu đầu vào cho username và password là rỗng nhưng lại mong đợi kết quả thành công (success) và chuyển hướng tới trang sản phẩm.
+[FAIL] TC47 | Giao diện, khả năng sử dụng & hiển thị dữ liệu | Kiểm tra hiển thị mật khẩu dưới dạng ký tự ẩn (masked password)
+       Kết quả thực tế : Không vào được trang sản phẩm. URL=https://www.saucedemo.com/. Thông báo lỗi: Epic sadface: Username is required
+       Kết luận AI     : test_error | mức độ: None | tin cậy: high
+       Nguyên nhân     : Test case định nghĩa thiếu dữ liệu đầu vào (username bị để trống), trong khi trang đăng nhập yêu cầu bắt buộc phải điền username trước khi hệ thống cho phép đăng nhập và chuyển hướng sang trang sản phẩm.
+[PASS] TC48 | Giao diện, khả năng sử dụng & hiển thị dữ liệu | Kiểm tra hiển thị trạng thái loading hoặc phản hồi khi đăng nhập chậm
+[PASS] TC49 | Giao diện, khả năng sử dụng & hiển thị dữ liệu | Kiểm tra giao diện và vị trí hiển thị của khối báo lỗi [data-test="error"]
+[PASS] TC50 | Giao diện, khả năng sử dụng & hiển thị dữ liệu | Kiểm tra hiển thị giao diện khi tên đăng nhập quá dài tràn khung
+[PASS] TC51 | Giao diện, khả năng sử dụng & hiển thị dữ liệu | Kiểm tra giao diện trang đăng nhập trên màn hình thiết bị di động (Responsive)
+[PASS] TC52 | Giao diện, khả năng sử dụng & hiển thị dữ liệu | Kiểm tra nút đóng (nút X) trên khối báo lỗi [data-test="error"]
+======================================================================

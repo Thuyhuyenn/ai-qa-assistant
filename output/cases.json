@@ -2,11 +2,12 @@
   {
     "id": "TC01",
     "type": "positive",
-    "title": "Đăng nhập thành công với tài khoản standard_user",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công với standard_user bằng cách click nút Login",
     "steps": [
-      "Nhập 'standard_user' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
+      "Nhập 'standard_user' vào ô #user-name",
+      "Nhập 'secret_sauce' vào ô #password",
+      "Click chuột vào #login-button"
     ],
     "data": {
       "username": "standard_user",
@@ -21,17 +22,97 @@
         "add_to_cart_works"
       ]
     },
-    "why_it_matters": "Đảm bảo luồng cốt lõi hoạt động bình thường, cho phép người dùng hợp lệ truy cập hệ thống.",
+    "why_it_matters": "Đảm bảo luồng đăng nhập cơ bản và phổ biến nhất của người dùng thông thường hoạt động trơn tru.",
     "priority": "high"
   },
   {
     "id": "TC02",
     "type": "positive",
-    "title": "Đăng nhập thành công với tài khoản problem_user",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công với standard_user bằng phím Enter tại ô Password",
     "steps": [
-      "Nhập 'problem_user' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
+      "Nhập 'standard_user' vào ô #user-name",
+      "Nhập 'secret_sauce' vào ô #password",
+      "Nhấn phím Enter tại ô #password"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "enter_on_password"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": [
+        "images_unique",
+        "add_to_cart_works"
+      ]
+    },
+    "why_it_matters": "Xác nhận tính tiện dụng (UX) khi người dùng hoàn tất nhập liệu và gửi form bằng phím Enter thay vì click chuột.",
+    "priority": "high"
+  },
+  {
+    "id": "TC03",
+    "type": "positive",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công với standard_user bằng phím Enter tại ô Username",
+    "steps": [
+      "Nhập 'secret_sauce' vào ô #password",
+      "Nhập 'standard_user' vào ô #user-name",
+      "Nhấn phím Enter ngay tại ô #user-name"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "enter_on_username"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": [
+        "images_unique",
+        "add_to_cart_works"
+      ]
+    },
+    "why_it_matters": "Kiểm tra sự kiện submit form được kích hoạt đúng từ mọi trường input hợp lệ trong form đăng nhập.",
+    "priority": "medium"
+  },
+  {
+    "id": "TC04",
+    "type": "positive",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công với performance_glitch_user bằng cách click nút Login",
+    "steps": [
+      "Nhập 'performance_glitch_user' vào ô #user-name",
+      "Nhập 'secret_sauce' vào ô #password",
+      "Click chuột vào #login-button",
+      "Chờ phản hồi khi server xử lý độ trễ"
+    ],
+    "data": {
+      "username": "performance_glitch_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": [
+        "images_unique",
+        "add_to_cart_works"
+      ]
+    },
+    "why_it_matters": "Xác minh hệ thống không bị timeout hoặc crash khi mạng hoặc dịch vụ xác thực bị chậm.",
+    "priority": "high"
+  },
+  {
+    "id": "TC05",
+    "type": "positive",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công với problem_user bằng cách click nút Login",
+    "steps": [
+      "Nhập 'problem_user' vào ô #user-name",
+      "Nhập 'secret_sauce' vào ô #password",
+      "Click chuột vào #login-button"
     ],
     "data": {
       "username": "problem_user",
@@ -43,149 +124,144 @@
       "error_contains": "",
       "post_checks": []
     },
-    "why_it_matters": "Xác minh hệ thống cho phép người dùng thuộc nhóm này đăng nhập dù tồn tại các lỗi ở trang phía sau.",
+    "why_it_matters": "Đảm bảo quá trình xác thực vẫn thành công để hệ thống có thể hiển thị và theo dõi các lỗi giao diện/chức năng sau đăng nhập.",
     "priority": "medium"
-  },
-  {
-    "id": "TC03",
-    "type": "positive",
-    "title": "Đăng nhập thành công với tài khoản performance_glitch_user",
-    "steps": [
-      "Nhập 'performance_glitch_user' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
-    ],
-    "data": {
-      "username": "performance_glitch_user",
-      "password": "secret_sauce",
-      "submit_with": "click"
-    },
-    "expected": {
-      "outcome": "success",
-      "error_contains": "",
-      "post_checks": []
-    },
-    "why_it_matters": "Kiểm tra khả năng chịu tải và thời gian phản hồi của hệ thống đối với tài khoản có độ trễ hiệu năng.",
-    "priority": "medium"
-  },
-  {
-    "id": "TC04",
-    "type": "positive",
-    "title": "Đăng nhập thành công bằng cách nhấn phím Enter trên trường password",
-    "steps": [
-      "Nhập 'standard_user' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấn phím Enter tại ô #password"
-    ],
-    "data": {
-      "username": "standard_user",
-      "password": "secret_sauce",
-      "submit_with": "enter_key"
-    },
-    "expected": {
-      "outcome": "success",
-      "error_contains": "",
-      "post_checks": []
-    },
-    "why_it_matters": "Cải thiện trải nghiệm người dùng bằng cách hỗ trợ phím tắt submit form nhanh chóng.",
-    "priority": "low"
-  },
-  {
-    "id": "TC05",
-    "type": "negative",
-    "title": "Đăng nhập thất bại với tài khoản bị khóa (locked_out_user)",
-    "steps": [
-      "Nhập 'locked_out_user' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
-    ],
-    "data": {
-      "username": "locked_out_user",
-      "password": "secret_sauce",
-      "submit_with": "click"
-    },
-    "expected": {
-      "outcome": "error",
-      "error_contains": "Sorry, this user has been locked out",
-      "post_checks": []
-    },
-    "why_it_matters": "Bảo mật hệ thống yêu cầu ngăn chặn các tài khoản bị khóa truy cập trái phép vào trang thương mại điện tử.",
-    "priority": "high"
   },
   {
     "id": "TC06",
-    "type": "negative",
-    "title": "Đăng nhập thất bại với mật khẩu sai",
+    "type": "positive",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công với visual_user bằng cách click nút Login",
     "steps": [
-      "Nhập 'standard_user' vào #user-name",
-      "Nhập 'wrong_password' vào #password",
-      "Nhấp vào #login-button"
+      "Nhập 'visual_user' vào ô #user-name",
+      "Nhập 'secret_sauce' vào ô #password",
+      "Click chuột vào #login-button"
     ],
     "data": {
-      "username": "standard_user",
-      "password": "wrong_password",
-      "submit_with": "click"
-    },
-    "expected": {
-      "outcome": "error",
-      "error_contains": "Username and password do not match",
-      "post_checks": []
-    },
-    "why_it_matters": "Ngăn chặn truy cập trái phép khi người dùng nhập sai mật khẩu.",
-    "priority": "high"
-  },
-  {
-    "id": "TC07",
-    "type": "negative",
-    "title": "Đăng nhập thất bại với tên đăng nhập không tồn tại",
-    "steps": [
-      "Nhập 'non_existent_user' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
-    ],
-    "data": {
-      "username": "non_existent_user",
+      "username": "visual_user",
       "password": "secret_sauce",
       "submit_with": "click"
     },
     "expected": {
-      "outcome": "error",
-      "error_contains": "Username and password do not match",
+      "outcome": "success",
+      "error_contains": "",
       "post_checks": []
     },
-    "why_it_matters": "Đảm bảo hệ thống không cho phép các tài khoản không có trong cơ sở dữ liệu đăng nhập.",
-    "priority": "high"
+    "why_it_matters": "Đảm bảo tài khoản kiểm thử hiển thị layout visual có thể truy cập thành công vào hệ thống.",
+    "priority": "medium"
+  },
+  {
+    "id": "TC07",
+    "type": "positive",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công với error_user bằng phím Enter",
+    "steps": [
+      "Nhập 'error_user' vào ô #user-name",
+      "Nhập 'secret_sauce' vào ô #password",
+      "Nhấn phím Enter tại ô #password"
+    ],
+    "data": {
+      "username": "error_user",
+      "password": "secret_sauce",
+      "submit_with": "enter_on_password"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Xác nhận các tài khoản đặc biệt dùng cho kiểm thử ngoại lệ vẫn hoàn tất được giai đoạn xác thực tài khoản.",
+    "priority": "low"
   },
   {
     "id": "TC08",
-    "type": "negative",
-    "title": "Đăng nhập thất bại khi bỏ trống cả username và password",
+    "type": "positive",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công với standard_user sau khi xóa lỗi đăng nhập trước đó",
     "steps": [
-      "Để trống #user-name",
-      "Để trống #password",
-      "Nhấp vào #login-button"
+      "Nhập 'locked_out_user' và 'secret_sauce' để kích hoạt [data-test=\"error\"]",
+      "Xóa nội dung #user-name và nhập lại 'standard_user'",
+      "Nhập 'secret_sauce' vào ô #password",
+      "Click chuột vào #login-button"
     ],
     "data": {
-      "username": "",
-      "password": "",
+      "username": "standard_user",
+      "password": "secret_sauce",
       "submit_with": "click"
     },
     "expected": {
-      "outcome": "error",
-      "error_contains": "Username is required",
-      "post_checks": []
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": [
+        "images_unique",
+        "add_to_cart_works"
+      ]
     },
-    "why_it_matters": "Bắt buộc người dùng phải điền thông tin xác thực trước khi gửi yêu cầu lên hệ thống.",
+    "why_it_matters": "Đảm bảo trạng thái lỗi trước đó không ngăn cản việc đăng nhập thành công khi người dùng nhập lại thông tin đúng.",
     "priority": "high"
   },
   {
     "id": "TC09",
-    "type": "boundary",
-    "title": "Đăng nhập thất bại khi để trống trường username",
+    "type": "positive",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công sau khi copy-paste dữ liệu hợp lệ vào các trường",
     "steps": [
-      "Để trống #user-name",
+      "Dán chuỗi 'standard_user' từ clipboard vào ô #user-name",
+      "Dán chuỗi 'secret_sauce' từ clipboard vào ô #password",
+      "Click chuột vào #login-button"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": [
+        "images_unique",
+        "add_to_cart_works"
+      ]
+    },
+    "why_it_matters": "Xác nhận hệ thống tiếp nhận đúng dữ liệu từ trình quản lý mật khẩu hoặc thao tác dán văn bản.",
+    "priority": "medium"
+  },
+  {
+    "id": "TC10",
+    "type": "positive",
+    "category": "Luồng chính (happy path)",
+    "title": "Đăng nhập thành công và duy trì phiên làm việc chuyển hướng tới /inventory.html",
+    "steps": [
+      "Nhập 'standard_user' vào ô #user-name",
+      "Nhập 'secret_sauce' vào ô #password",
+      "Click chuột vào #login-button",
+      "Kiểm tra URL đích và khả năng truy cập trang sản phẩm"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": [
+        "images_unique",
+        "add_to_cart_works"
+      ]
+    },
+    "why_it_matters": "Đảm bảo cookie/session token được thiết lập chính xác để duy trì phiên người dùng sau khi đăng nhập.",
+    "priority": "high"
+  },
+  {
+    "id": "TC11",
+    "type": "negative",
+    "title": "Đăng nhập với ô Username để trống và Password hợp lệ",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Để trống ô #user-name",
       "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
+      "Click #login-button"
     ],
     "data": {
       "username": "",
@@ -197,17 +273,19 @@
       "error_contains": "Username is required",
       "post_checks": []
     },
-    "why_it_matters": "Xác thực biên dữ liệu khi thiếu thông tin bắt buộc.",
-    "priority": "medium"
+    "why_it_matters": "Đảm bảo hệ thống ngăn chặn người dùng đăng nhập thiếu thông tin định danh quan trọng.",
+    "priority": "high",
+    "category": "Dữ liệu không hợp lệ"
   },
   {
-    "id": "TC10",
-    "type": "boundary",
-    "title": "Đăng nhập thất bại khi để trống trường password",
+    "id": "TC12",
+    "type": "negative",
+    "title": "Đăng nhập với Username hợp lệ và ô Password để trống",
     "steps": [
+      "Truy cập trang đăng nhập",
       "Nhập 'standard_user' vào #user-name",
-      "Để trống #password",
-      "Nhấp vào #login-button"
+      "Để trống ô #password",
+      "Click #login-button"
     ],
     "data": {
       "username": "standard_user",
@@ -219,108 +297,45 @@
       "error_contains": "Password is required",
       "post_checks": []
     },
-    "why_it_matters": "Đảm bảo mật khẩu không được để trống khi thực hiện đăng nhập.",
-    "priority": "medium"
-  },
-  {
-    "id": "TC11",
-    "type": "boundary",
-    "title": "Đăng nhập thất bại với username có độ dài quá lớn",
-    "steps": [
-      "Nhập chuỗi 255 ký tự 'a' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
-    ],
-    "data": {
-      "username": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "password": "secret_sauce",
-      "submit_with": "click"
-    },
-    "expected": {
-      "outcome": "error",
-      "error_contains": "Username and password do not match",
-      "post_checks": []
-    },
-    "why_it_matters": "Kiểm tra giới hạn ký tự (buffer overflow/validation) để tránh lỗi hệ thống khi nhập chuỗi quá dài.",
-    "priority": "low"
-  },
-  {
-    "id": "TC12",
-    "type": "boundary",
-    "title": "Đăng nhập thất bại với mật khẩu chứa ký tự đặc biệt không hợp lệ",
-    "steps": [
-      "Nhập 'standard_user' vào #user-name",
-      "Nhập '!@#$%^&*()' vào #password",
-      "Nhấp vào #login-button"
-    ],
-    "data": {
-      "username": "standard_user",
-      "password": "!@#$%^&*()",
-      "submit_with": "click"
-    },
-    "expected": {
-      "outcome": "error",
-      "error_contains": "Username and password do not match",
-      "post_checks": []
-    },
-    "why_it_matters": "Đảm bảo tính toàn vẹn và bảo mật của cơ chế xác thực mật khẩu.",
-    "priority": "low"
+    "why_it_matters": "Kiểm tra cơ chế xác thực bắt buộc nhập mật khẩu để bảo mật tài khoản.",
+    "priority": "high",
+    "category": "Dữ liệu không hợp lệ"
   },
   {
     "id": "TC13",
-    "type": "validation",
-    "title": "Đăng nhập thất bại do phân biệt chữ hoa/thường ở username",
+    "type": "negative",
+    "title": "Đăng nhập với cả Username và Password đều để trống",
     "steps": [
-      "Nhập 'Standard_User' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
+      "Truy cập trang đăng nhập",
+      "Để trống cả #user-name và #password",
+      "Click #login-button"
     ],
     "data": {
-      "username": "Standard_User",
-      "password": "secret_sauce",
+      "username": "",
+      "password": "",
       "submit_with": "click"
     },
     "expected": {
       "outcome": "error",
-      "error_contains": "Username and password do not match",
+      "error_contains": "Username is required",
       "post_checks": []
     },
-    "why_it_matters": "Hệ thống phân biệt chữ hoa/thường, nếu bỏ qua sẽ gây lỗi đăng nhập cho người dùng gõ sai định dạng.",
-    "priority": "medium"
+    "why_it_matters": "Ngăn chặn việc gửi form trống làm quá tải hệ thống xác thực ngầm.",
+    "priority": "medium",
+    "category": "Dữ liệu không hợp lệ"
   },
   {
     "id": "TC14",
-    "type": "validation",
-    "title": "Đăng nhập thất bại do phân biệt chữ hoa/thường ở password",
+    "type": "negative",
+    "title": "Đăng nhập với Username không tồn tại trong hệ thống",
     "steps": [
-      "Nhập 'standard_user' vào #user-name",
-      "Nhập 'SECRET_SAUCE' vào #password",
-      "Nhấp vào #login-button"
-    ],
-    "data": {
-      "username": "standard_user",
-      "password": "SECRET_SAUCE",
-      "submit_with": "click"
-    },
-    "expected": {
-      "outcome": "error",
-      "error_contains": "Username and password do not match",
-      "post_checks": []
-    },
-    "why_it_matters": "Xác thực rằng mật khẩu được phân biệt chính xác chữ hoa và chữ thường nhằm bảo mật tài khoản.",
-    "priority": "medium"
-  },
-  {
-    "id": "TC15",
-    "type": "validation",
-    "title": "Đăng nhập thất bại khi username chứa khoảng trắng thừa ở đầu",
-    "steps": [
-      "Nhập ' standard_user' vào #user-name",
+      "Truy cập trang đăng nhập",
+      "Nhập 'invalid_user_123' vào #user-name",
       "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
+      "Click #login-button"
     ],
     "data": {
-      "username": " standard_user",
+      "username": "invalid_user_123",
       "password": "secret_sauce",
       "submit_with": "click"
     },
@@ -329,21 +344,23 @@
       "error_contains": "Username and password do not match",
       "post_checks": []
     },
-    "why_it_matters": "Kiểm tra xem hệ thống có tự động cắt khoảng trắng (trim) hay không để tránh lỗi đăng nhập không mong muốn.",
-    "priority": "low"
+    "why_it_matters": "Đảm bảo tài khoản không có thật không thể truy cập trái phép vào hệ thống.",
+    "priority": "high",
+    "category": "Dữ liệu không hợp lệ"
   },
   {
-    "id": "TC16",
-    "type": "validation",
-    "title": "Đăng nhập thất bại khi password chứa khoảng trắng thừa ở cuối",
+    "id": "TC15",
+    "type": "negative",
+    "title": "Đăng nhập với đúng Username nhưng sai Password",
     "steps": [
+      "Truy cập trang đăng nhập",
       "Nhập 'standard_user' vào #user-name",
-      "Nhập 'secret_sauce ' vào #password",
-      "Nhấp vào #login-button"
+      "Nhập 'wrong_password' vào #password",
+      "Click #login-button"
     ],
     "data": {
       "username": "standard_user",
-      "password": "secret_sauce ",
+      "password": "wrong_password",
       "submit_with": "click"
     },
     "expected": {
@@ -351,17 +368,307 @@
       "error_contains": "Username and password do not match",
       "post_checks": []
     },
-    "why_it_matters": "Đảm bảo người dùng sao chép mật khẩu dính khoảng trắng thừa sẽ được xử lý hoặc báo lỗi chính xác.",
-    "priority": "low"
+    "why_it_matters": "Bảo vệ tài khoản người dùng hợp lệ khỏi các cuộc tấn công dò mật khẩu (brute force).",
+    "priority": "high",
+    "category": "Dữ liệu không hợp lệ"
+  },
+  {
+    "id": "TC16",
+    "type": "negative",
+    "title": "Đăng nhập với tài khoản đã bị khóa (locked_out_user)",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập 'locked_out_user' vào #user-name",
+      "Nhập 'secret_sauce' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "locked_out_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Sorry, this user has been locked out",
+      "post_checks": []
+    },
+    "why_it_matters": "Xác thực rằng trạng thái khóa tài khoản được thực thi đúng để ngăn chặn quyền truy cập bị đình chỉ.",
+    "priority": "high",
+    "category": "Dữ liệu không hợp lệ"
   },
   {
     "id": "TC17",
     "type": "validation",
-    "title": "Đăng nhập thất bại khi nhập username dạng SQL Injection cơ bản",
+    "title": "Đăng nhập với Username chỉ chứa toàn khoảng trắng",
     "steps": [
-      "Nhập \"'OR '1'='1\" vào #user-name",
+      "Truy cập trang đăng nhập",
+      "Nhập '   ' vào #user-name",
       "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "   ",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Kiểm tra xem hệ thống có tự động cắt bỏ khoảng trắng hoặc xử lý đúng định dạng đầu vào không hợp lệ hay không.",
+    "priority": "medium",
+    "category": "Dữ liệu không hợp lệ"
+  },
+  {
+    "id": "TC18",
+    "type": "validation",
+    "title": "Đăng nhập sai phân biệt chữ hoa chữ thường (Case-sensitivity) ở Username",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập 'STANDARD_USER' (viết hoa toàn bộ) vào #user-name",
+      "Nhập 'secret_sauce' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "STANDARD_USER",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo hệ thống phân biệt chính xác chữ hoa/thường của tên đăng nhập, tránh nhầm lẫn tài khoản.",
+    "priority": "medium",
+    "category": "Dữ liệu không hợp lệ"
+  },
+  {
+    "id": "TC19",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với username để trống và password hợp lệ",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Để trống ô #user-name",
+      "Nhập 'secret_sauce' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username is required",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo hệ thống bắt lỗi bắt buộc nhập username, tránh gửi request thiếu dữ liệu lên server.",
+    "priority": "high"
+  },
+  {
+    "id": "TC20",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với username hợp lệ và password để trống",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập 'standard_user' vào #user-name",
+      "Để trống ô #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Password is required",
+      "post_checks": []
+    },
+    "why_it_matters": "Ngăn chặn người dùng bỏ trống mật khẩu, bảo mật luồng xác thực của hệ thống.",
+    "priority": "high"
+  },
+  {
+    "id": "TC21",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với username chứa khoảng trắng ở đầu và cuối",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập ' standard_user ' vào #user-name",
+      "Nhập 'secret_sauce' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": " standard_user ",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Xác thực xem hệ thống có tự động cắt khoảng trắng (trim) hay không, ngăn lỗi người dùng copy-paste nhầm khoảng trắng.",
+    "priority": "medium"
+  },
+  {
+    "id": "TC22",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với chuỗi ký tự cực dài trong ô username",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập chuỗi 255 ký tự ngẫu nhiên vào #user-name",
+      "Nhập 'secret_sauce' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "a_very_long_username_string_that_exceeds_normal_length_limits_to_test_how_the_input_field_and_backend_handles_overflow_or_buffer_issues_and_ensure_no_crashes_happen_when_processing_excessive_amounts_of_text_input_data_for_security_and_stability_purposes",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Kiểm tra giới hạn buffer của input và cơ sở dữ liệu, phòng ngừa lỗi tràn bộ nhớ hoặc SQL Injection dạng chuỗi dài.",
+    "priority": "medium"
+  },
+  {
+    "id": "TC23",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với username chứa ký tự đặc biệt",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập 'user!@#$%' vào #user-name",
+      "Nhập 'secret_sauce' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "user!@#$%",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo hệ thống xử lý an toàn các ký tự đặc biệt, tránh lỗ hổng bảo mật như Injection.",
+    "priority": "high"
+  },
+  {
+    "id": "TC24",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với username chứa ký tự Unicode và tiếng Việt có dấu",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập 'người_dùng' vào #user-name",
+      "Nhập 'secret_sauce' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "người_dùng",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Kiểm tra khả năng hỗ trợ bảng mã UTF-8 của form đăng nhập, tránh lỗi mã hóa hiển thị hoặc lỗi sập hệ thống khi xử lý Unicode.",
+    "priority": "medium"
+  },
+  {
+    "id": "TC25",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với username chứa emoji",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập 'standard_user😀' vào #user-name",
+      "Nhập 'secret_sauce' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "standard_user😀",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Kiểm tra tính chịu lỗi của hệ thống đối với các ký tự emoji 4-byte, ngăn chặn lỗi lưu trữ database liên quan đến collation.",
+    "priority": "low"
+  },
+  {
+    "id": "TC26",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với password chứa cú pháp SQL Injection đơn giản",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập 'standard_user' vào #user-name",
+      "Nhập \"' OR '1'='1\" vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "' OR '1'='1",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Kiểm tra khả năng chống tấn công SQL Injection cơ bản tại ô mật khẩu, đảm bảo bảo mật dữ liệu.",
+    "priority": "high"
+  },
+  {
+    "id": "TC27",
+    "type": "boundary",
+    "category": "Giá trị biên & ký tự đặc biệt",
+    "title": "Đăng nhập với password chứa thẻ HTML/XSS payload",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Nhập 'standard_user' vào #user-name",
+      "Nhập '<script>alert(1)</script>' vào #password",
+      "Click #login-button"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "<script>alert(1)</script>",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo dữ liệu đầu vào được escape/sanitize đúng cách, phòng chống lỗ hổng Cross-Site Scripting (XSS).",
+    "priority": "high"
+  },
+  {
+    "id": "TC28",
+    "type": "negative",
+    "title": "Dang nhap voi SQL Injection trong truong Username",
+    "steps": [
+      "Truy cap trang dang nhap",
+      "Nhap gia tri 'OR '1'='1 vao o #user-name",
+      "Nhap mat khau bat ky vao o #password",
+      "Click vao nut #login-button"
     ],
     "data": {
       "username": "'OR '1'='1",
@@ -373,17 +680,43 @@
       "error_contains": "Username and password do not match",
       "post_checks": []
     },
-    "why_it_matters": "Kiểm tra khả năng chống tấn công SQL Injection trên form đăng nhập.",
-    "priority": "high"
+    "why_it_matters": "Dam bao he thong khong bi qua tai hoac cho phep truy cap trai phep thong qua cac cau lenh SQL injection.",
+    "priority": "high",
+    "category": "Bảo mật"
   },
   {
-    "id": "TC18",
-    "type": "validation",
-    "title": "Đăng nhập thất bại khi nhập script HTML/XSS vào username",
+    "id": "TC29",
+    "type": "negative",
+    "title": "Dang nhap voi SQL Injection trong truong Password",
     "steps": [
-      "Nhập '<script>alert(1)</script>' vào #user-name",
-      "Nhập 'secret_sauce' vào #password",
-      "Nhấp vào #login-button"
+      "Truy cap trang dang nhap",
+      "Nhap username hop le standard_user vao o #user-name",
+      "Nhap gia tri ' OR '1'='1 vao o #password",
+      "Click vao nut #login-button"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "' OR '1'='1",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Ngan chan ke tan cong bypass xac thuc bang cach chen ma doc hai vao tham so mat khau.",
+    "priority": "high",
+    "category": "Bảo mật"
+  },
+  {
+    "id": "TC30",
+    "type": "negative",
+    "title": "Dang nhap voi payload XSS trong truong Username",
+    "steps": [
+      "Truy cap trang dang nhap",
+      "Nhap gia tri <script>alert(1)</script> vao o #user-name",
+      "Nhap mat khau vao o #password",
+      "Click vao nut #login-button"
     ],
     "data": {
       "username": "<script>alert(1)</script>",
@@ -395,7 +728,506 @@
       "error_contains": "Username and password do not match",
       "post_checks": []
     },
-    "why_it_matters": "Đảm bảo hệ thống escape hoặc sanitize dữ liệu đầu vào để ngăn chặn lỗ hổng XSS.",
-    "priority": "high"
+    "why_it_matters": "Kiem tra xem ung dung co bi lo hong Stored hoac Reflected XSS khi xu ly du lieu dau vao hay khong.",
+    "priority": "high",
+    "category": "Bảo mật"
+  },
+  {
+    "id": "TC31",
+    "type": "negative",
+    "title": "Kiem tra tinh nang che mat khau (Password Masking)",
+    "steps": [
+      "Truy cap trang dang nhap",
+      "Nhap chuoi bat ky vao o #password",
+      "Kiem tra thuoc tinh type cua input #password"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "none"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Dam bao mat khau hien thi dang ky tu an (dau cham hoac dau hoa) de tranh bi nhin trom.",
+    "priority": "medium",
+    "category": "Bảo mật"
+  },
+  {
+    "id": "TC32",
+    "type": "negative",
+    "title": "Thong bao loi khong duoc lo thong tin chi tiet ve he thong",
+    "steps": [
+      "Truy cap trang dang nhap",
+      "Nhap sai username va password",
+      "Click vao nut #login-button",
+      "Kiem tra noi dung thong bao tai [data-test=\"error\"]"
+    ],
+    "data": {
+      "username": "wrong_user",
+      "password": "wrong_password",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username and password do not match",
+      "post_checks": []
+    },
+    "why_it_matters": "Tranh viec thong bao loi qua chi tiet (vi du: 'Sai mat khau cho user nay') giup hacker doan duoc tai khoan ton tai.",
+    "priority": "high",
+    "category": "Bảo mật"
+  },
+  {
+    "id": "TC33",
+    "type": "negative",
+    "title": "Truy cap truc tiep trang inventory.html khi chua dang nhap",
+    "steps": [
+      "Mo trinh duyet o che do an danh",
+      "Truy cap thang URL chua xac thuc: https://www.saucedemo.com/inventory.html"
+    ],
+    "data": {
+      "username": "",
+      "password": "",
+      "submit_with": "none"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Epic sadface",
+      "post_checks": []
+    },
+    "why_it_matters": "Dam bao co co che phan quyen (Access Control) ngan chan truy cap trai phep vao trang noi bo khi chua xac thuc.",
+    "priority": "high",
+    "category": "Bảo mật"
+  },
+  {
+    "id": "TC34",
+    "type": "negative",
+    "title": "Kiem tra thong tin nhay cam tren URL sau khi dang nhap thanh cong",
+    "steps": [
+      "Truy cap trang dang nhap",
+      "Nhap thong tin standard_user va secret_sauce",
+      "Click vao nut #login-button",
+      "Kiem tra URL cua trinh duyet sau khi chuyen huong"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Dam bao mat khau hoac token xac thuc khong bi lo tren thanh dia chi URL (GET method leak).",
+    "priority": "high",
+    "category": "Bảo mật"
+  },
+  {
+    "id": "TC35",
+    "type": "negative",
+    "title": "Dang nhap sai nhieu lan lien tiep (Kiem tra co che khoa tai khoan hoac rate limit)",
+    "steps": [
+      "Truy cap trang dang nhap",
+      "Thuc hien nhap sai password cho standard_user 5 lan lien tiep",
+      "Moi lan nhap sai deu click vao #login-button"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "wrong_password",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "locked out",
+      "post_checks": []
+    },
+    "why_it_matters": "Phong chong tan cong tan cong doan mat khau (Brute-force attack) tu dong.",
+    "priority": "medium",
+    "category": "Bảo mật"
+  },
+  {
+    "id": "TC36",
+    "type": "positive",
+    "title": "Đăng xuất thành công từ trang inventory",
+    "steps": [
+      "Đăng nhập với tài khoản standard_user",
+      "Mở menu burger bên góc trái",
+      "Click vào nút Logout"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo người dùng có thể kết thúc phiên làm việc an toàn, tránh bị người khác truy cập trái phép trên thiết bị chung.",
+    "priority": "high",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC37",
+    "type": "negative",
+    "title": "Sử dụng nút Back của trình duyệt sau khi đã đăng xuất",
+    "steps": [
+      "Đăng nhập thành công",
+      "Thực hiện đăng xuất",
+      "Bấm nút Back trên trình duyệt để quay lại trang inventory"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "You can only access",
+      "post_checks": []
+    },
+    "why_it_matters": "Ngăn chặn việc người dùng quay lại trang bảo mật sau khi đã đăng xuất nếu session chưa được hủy đúng cách.",
+    "priority": "high",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC38",
+    "type": "negative",
+    "title": "Sử dụng nút Forward của trình duyệt sau khi đăng nhập",
+    "steps": [
+      "Truy cập trang đăng nhập",
+      "Bấm nút Forward trên trình duyệt trước khi nhập thông tin"
+    ],
+    "data": {
+      "username": "",
+      "password": "",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Kiểm soát luồng điều hướng tiến/lùi của trình duyệt không làm lộ dữ liệu hoặc phá vỡ trạng thái ứng dụng.",
+    "priority": "low",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC39",
+    "type": "positive",
+    "title": "Tải lại trang (F5) khi đang ở trang inventory sau khi đăng nhập",
+    "steps": [
+      "Đăng nhập thành công vào /inventory.html",
+      "Bấm F5 hoặc nút reload trên trình duyệt"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": [
+        "images_unique"
+      ]
+    },
+    "why_it_matters": "Đảm bảo phiên làm việc không bị mất đột ngột và dữ liệu được duy trì đúng khi người dùng refresh trang.",
+    "priority": "medium",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC40",
+    "type": "negative",
+    "title": "Truy cập trực tiếp URL /inventory.html khi chưa đăng nhập",
+    "steps": [
+      "Mở trình duyệt ở trạng thái chưa đăng nhập",
+      "Nhập trực tiếp đường dẫn https://www.saucedemo.com/inventory.html vào thanh địa chỉ"
+    ],
+    "data": {
+      "username": "",
+      "password": "",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "You can only access",
+      "post_checks": []
+    },
+    "why_it_matters": "Bảo vệ các trang nội bộ khỏi việc truy cập trái phép qua URL trực tiếp.",
+    "priority": "high",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC41",
+    "type": "positive",
+    "title": "Mở nhiều tab trình duyệt cùng lúc với một phiên đăng nhập",
+    "steps": [
+      "Đăng nhập thành công ở Tab 1",
+      "Mở Tab 2 và truy cập trực tiếp /inventory.html"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Trải nghiệm người dùng tốt khi họ muốn sử dụng song song nhiều tab trên cùng một hệ thống mà không bị đá văng.",
+    "priority": "medium",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC42",
+    "type": "negative",
+    "title": "Đăng xuất ở một tab và thao tác trên tab khác",
+    "steps": [
+      "Đăng nhập thành công và mở 2 tab (Tab 1 và Tab 2)",
+      "Thực hiện đăng xuất ở Tab 1",
+      "Chuyển sang Tab 2 và thực hiện một thao tác bất kỳ (như click thêm sản phẩm)"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "You can only access",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo tính đồng bộ của session trên toàn bộ trình duyệt, tránh lỗ hổng bảo mật khi đăng xuất một nơi nhưng tab khác vẫn tương tác được.",
+    "priority": "high",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC43",
+    "type": "boundary",
+    "title": "Click liên tục nhiều lần vào nút Login (Double/Multi Submit)",
+    "steps": [
+      "Nhập username và password hợp lệ vào #user-name và #password",
+      "Click liên tục 5 lần vào #login-button trong thời gian ngắn"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Ngăn chặn việc gửi nhiều request đăng nhập đồng thời gây quá tải hệ thống hoặc tạo ra các lỗi xung đột session.",
+    "priority": "medium",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC44",
+    "type": "negative",
+    "title": "Tải lại trang (F5) tại màn hình đăng nhập khi đang nhập dở dữ liệu",
+    "steps": [
+      "Nhập username và password vào form",
+      "Bấm F5 làm mới trang",
+      "Kiểm tra trạng thái các input"
+    ],
+    "data": {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Xác thực hành vi xóa trắng form hoặc giữ lại dữ liệu theo thiết kế, tránh hiểu lầm cho người dùng.",
+    "priority": "low",
+    "category": "Phiên đăng nhập & điều hướng"
+  },
+  {
+    "id": "TC45",
+    "type": "positive",
+    "title": "Kiểm tra hiển thị nhãn và placeholder của các trường nhập liệu",
+    "steps": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Quan sát ô Username và Password"
+    ],
+    "data": {
+      "username": "",
+      "password": "",
+      "submit_with": "none"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo người dùng nhận diện đúng ô nhập liệu, tránh nhập nhầm thông tin và nâng cao trải nghiệm người dùng.",
+    "priority": "medium",
+    "category": "Giao diện, khả năng sử dụng & hiển thị dữ liệu"
+  },
+  {
+    "id": "TC46",
+    "type": "positive",
+    "title": "Kiểm tra khả năng điều hướng bằng phím Tab giữa các thành phần",
+    "steps": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Nhấn phím Tab liên tục từ ô #user-name đến #password và #login-button"
+    ],
+    "data": {
+      "username": "",
+      "password": "",
+      "submit_with": "keyboard"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Hỗ trợ người dùng thao tác nhanh chóng bằng bàn phím và đáp ứng tiêu chuẩn Accessibility (khả năng truy cập).",
+    "priority": "medium",
+    "category": "Giao diện, khả năng sử dụng & hiển thị dữ liệu"
+  },
+  {
+    "id": "TC47",
+    "type": "positive",
+    "title": "Kiểm tra hiển thị mật khẩu dưới dạng ký tự ẩn (masked password)",
+    "steps": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Nhập ký tự vào ô #password"
+    ],
+    "data": {
+      "username": "",
+      "password": "secret_sauce",
+      "submit_with": "none"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Bảo mật thông tin mật khẩu của người dùng, tránh bị lộ khi có người đứng cạnh nhìn màn hình.",
+    "priority": "high",
+    "category": "Giao diện, khả năng sử dụng & hiển thị dữ liệu"
+  },
+  {
+    "id": "TC48",
+    "type": "positive",
+    "title": "Kiểm tra hiển thị trạng thái loading hoặc phản hồi khi đăng nhập chậm",
+    "steps": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Nhập username là performance_glitch_user và password là secret_sauce",
+      "Click vào #login-button và quan sát thời gian chờ chuyển hướng"
+    ],
+    "data": {
+      "username": "performance_glitch_user",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "success",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo hệ thống không bị đơ hoặc trắng trang khi xử lý chậm, giúp người dùng biết hệ thống đang xử lý yêu cầu.",
+    "priority": "medium",
+    "category": "Giao diện, khả năng sử dụng & hiển thị dữ liệu"
+  },
+  {
+    "id": "TC49",
+    "type": "negative",
+    "title": "Kiểm tra giao diện và vị trí hiển thị của khối báo lỗi [data-test=\"error\"]",
+    "steps": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Để trống cả hai ô và click #login-button"
+    ],
+    "data": {
+      "username": "",
+      "password": "",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Username is required",
+      "post_checks": []
+    },
+    "why_it_matters": "Thông báo lỗi phải hiển thị trực quan, dễ nhìn để người dùng nhận biết ngay vị trí cần sửa.",
+    "priority": "high",
+    "category": "Giao diện, khả năng sử dụng & hiển thị dữ liệu"
+  },
+  {
+    "id": "TC50",
+    "type": "boundary",
+    "title": "Kiểm tra hiển thị giao diện khi tên đăng nhập quá dài tràn khung",
+    "steps": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Nhập một chuỗi ký tự rất dài vào ô #user-name"
+    ],
+    "data": {
+      "username": "a_very_long_username_that_exceeds_normal_length_limit_1234567890",
+      "password": "secret_sauce",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Epic sadface",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo giao diện input không bị vỡ khung hoặc đẩy các thành phần khác dịch chuyển lệch lạc.",
+    "priority": "low",
+    "category": "Giao diện, khả năng sử dụng & hiển thị dữ liệu"
+  },
+  {
+    "id": "TC51",
+    "type": "positive",
+    "title": "Kiểm tra giao diện trang đăng nhập trên màn hình thiết bị di động (Responsive)",
+    "steps": [
+      "Mở trang đăng nhập trên trình duyệt ở chế độ giả lập thiết bị di động",
+      "Quan sát kích thước và vị trí của #user-name, #password, #login-button"
+    ],
+    "data": {
+      "username": "",
+      "password": "",
+      "submit_with": "none"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "",
+      "post_checks": []
+    },
+    "why_it_matters": "Đảm bảo trải nghiệm tốt trên các thiết bị di động, tránh việc các nút bấm quá nhỏ hoặc bị che khuất.",
+    "priority": "high",
+    "category": "Giao diện, khả năng sử dụng & hiển thị dữ liệu"
+  },
+  {
+    "id": "TC52",
+    "type": "positive",
+    "title": "Kiểm tra nút đóng (nút X) trên khối báo lỗi [data-test=\"error\"]",
+    "steps": [
+      "Truy cập trang đăng nhập https://www.saucedemo.com",
+      "Gây ra thông báo lỗi bằng cách đăng nhập sai",
+      "Click vào nút X trên khối báo lỗi [data-test=\"error\"]"
+    ],
+    "data": {
+      "username": "wrong_user",
+      "password": "wrong_password",
+      "submit_with": "click"
+    },
+    "expected": {
+      "outcome": "error",
+      "error_contains": "Epic sadface",
+      "post_checks": []
+    },
+    "why_it_matters": "Giúp người dùng có thể chủ động ẩn thông báo lỗi đi khi họ muốn làm sạch giao diện màn hình.",
+    "priority": "low",
+    "category": "Giao diện, khả năng sử dụng & hiển thị dữ liệu"
   }
 ]
