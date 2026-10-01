@@ -19,13 +19,16 @@ def check_add_to_cart(page):
 
 CHECKS = {"images_unique": check_images_unique, "add_to_cart_works": check_add_to_cart}
 
-def run_case(page, tc):
+def run_case(page, tc, base_url=BASE):
     d, e = tc["data"], tc["expected"]
-    page.goto(BASE)
+    page.goto(base_url)
     page.fill("#user-name", d.get("username", ""))
     page.fill("#password", d.get("password", ""))
     
-    if d.get("submit_with") == "enter":
+    submit_with = d.get("submit_with", "click")
+    if submit_with == "enter_on_username":
+        page.press("#user-name", "Enter")
+    elif submit_with in ("enter", "enter_on_password"):
         page.press("#password", "Enter")
     else:
         page.click("#login-button")
@@ -55,7 +58,8 @@ def run_case(page, tc):
         return False, f"Thông báo lỗi khác với mong đợi. Thực tế nhận được: '{text}'"
     return True, f"Hiển thị đúng lỗi mong đợi: '{text}'"
 
-def run_all(cases_path="output/cases.json", out_path="output/results.json"):
+def run_all(cases_path="output/cases.json", out_path="output/results.json",
+            base_url=BASE):
     cases = json.load(open(cases_path, encoding="utf-8"))
     os.makedirs("output/screenshots", exist_ok=True)
     results = []
@@ -68,7 +72,7 @@ def run_all(cases_path="output/cases.json", out_path="output/results.json"):
             page = ctx.new_page()
             start = time.time()
             try:
-                passed, actual = run_case(page, tc)
+                passed, actual = run_case(page, tc, base_url=base_url)
             except Exception as ex:
                 passed, actual = False, f"Lỗi ngoại lệ khi chạy test: {ex}"
             

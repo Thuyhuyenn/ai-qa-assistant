@@ -1,5 +1,5 @@
 import streamlit as st
-import json, os, subprocess
+import json, os, subprocess, sys
 import pandas as pd
 
 st.set_page_config(page_title="AI Autonomous QA Agent Dashboard", layout="wide", page_icon="🤖")
@@ -14,11 +14,16 @@ user_story = st.sidebar.text_area("User Story / Yêu cầu", "Là người dùng
 
 if st.sidebar.button("🚀 Chạy toàn bộ Pipeline QA"):
     with st.spinner("Đang thực thi quy trình QA tự động (Sinh test -> Chạy Playwright -> Phân tích AI)..."):
-        result = subprocess.run(["python", "main.py"], capture_output=True, text=True)
+        result = subprocess.run(
+            [sys.executable, "main.py", user_story, "--url", target_url],
+            capture_output=True,
+            text=True,
+        )
         if result.returncode == 0:
             st.sidebar.success("✅ Chạy pipeline thành công hoàn toàn!")
         else:
             st.sidebar.error("❌ Có lỗi xảy ra trong quá trình chạy!")
+            st.sidebar.code(result.stderr or result.stdout)
 
 # Khu vực hiển thị kết quả chính
 tab1, tab2, tab3 = st.tabs(["📊 Tổng quan & Biểu đồ", "📋 Danh sách Test Cases", "🐞 Báo cáo Lỗi (Bug Reports)"])

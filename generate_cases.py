@@ -70,6 +70,19 @@ def generate(user_story: str, out_path="output/cases.json"):
 
     if not all_cases:
         raise RuntimeError("Không sinh được test case nào. Hãy thử lại sau.")
+    if len(all_cases) < 15:
+        raise RuntimeError(
+            f"Chỉ sinh được {len(all_cases)} test case; yêu cầu tối thiểu là 15."
+        )
+    required_types = {"positive", "negative", "boundary", "validation"}
+    missing_types = required_types - {
+        str(c.get("type", "")).strip().lower() for c in all_cases
+    }
+    if missing_types:
+        raise RuntimeError(
+            "Bộ test còn thiếu nhóm bắt buộc: "
+            + ", ".join(sorted(missing_types))
+        )
 
     # Đánh lại id liên tục, giữ kiểu id mà model đang dùng (vd TC01)
     prefix, width = _split_id(all_cases[0].get("id", "TC01"))
